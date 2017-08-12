@@ -1,0 +1,10 @@
+/.svn/
+/com/
+/.settings/
+/WEB-INF/
+/application/
+/lib/
+/login.jsp
+/loginAng.jsp
+/static/
+/upload.jsp

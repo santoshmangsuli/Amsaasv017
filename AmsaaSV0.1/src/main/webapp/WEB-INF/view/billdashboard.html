@@ -1,0 +1,291 @@
+		
+<div id="billDashBoardTab">
+	<uib-tabset> <uib-tab index="0" heading="BILLS DASHBOARD">
+	<table id="srvcMgrTable" class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th>Sl #</th>
+				<th>Person Name</th>
+				<th>Flat No</th>
+				<th>Bill Date</th>
+				<th>Bill Due Date</th>
+				<th>Status</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in ctrlbills">
+				<td>{{item.billNumber}}</td>
+				<td><span>{{item.billedPerson.persnFirstName}}</span> <span>{{item.billedPerson.persnLastName}}</span>
+				</td>
+				<td><span>{{item.billedPerson.persnAddress.flatNumber}}</span>
+				</td>
+				<td><span>{{item.billDate| date:'MM/dd/yyyy'}}</span>
+				</td>
+				<td><span>{{item.billDueDate| date:'MM/dd/yyyy'}}</span>
+				</td>
+				<td><span>{{item.billPaymentRegister.billPaymentStatus}}</span>
+				</td>
+				<td><button type="button" class="btn btn-warning" id="payBtn"
+						data-toggle="modal" data-target="#myModal"
+						data-bind="click:showModal">Pay</button>
+				</td>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<td colspan="7">Records/Page:<select id="records"
+					data-bind="options:billPagedGridView().pageRecordOption,value:billPagedGridView().chosenPageRecord"></select>
+					<button id="firstPage"
+						data-bind="click:billPagedGridView().moveToFirstPage"
+						title="Go to first page">
+						<span class="icon-fast-backward"></span>
+					</button>
+					<button id="prevPage"
+						data-bind="click:billPagedGridView().moveToPrevPage"
+						title="Go to prev page">
+						<span class="icon-step-backward"></span>
+					</button> Page:<span data-bind="text:billPagedGridView().currentPageNo"></span>
+					/<span data-bind="text:billPagedGridView().noOfPages"></span>
+					<button id="nextPage"
+						data-bind="click:billPagedGridView().moveToNextPage"
+						title="Go to next page">
+						<span class="icon-step-forward"></span>
+					</button>
+					<button id="lastPage"
+						data-bind="click:billPagedGridView().moveToLastPage"
+						title="Go to last page">
+						<span class="icon-fast-forward"></span>
+					</button></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div class="modal fade" id="myModal" role="dialog"></div>
+	</uib-tab> <uib-tab index="1" heading="Create Bill"> <!--Test Start-->
+		<uib-accordion>
+		<div uib-accordion-group class="panel-default" heading="Bill Header"
+			is-open="true" is-disabled="false">
+			<table id="billDetailTable" class="table table-striped">
+				<tbody>
+					<tr>
+						<td style="width: 20%">Bill Date&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+						<td style="width: 20%" >
+							<datepicker date-format="MM/dd/yyyy">
+								<input id="billDate" ng-model="bill.billDate" type="text" />
+							</datepicker>
+						</td>
+						<td style="width: 20%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td style="width: 20%">Bill Due Date&nbsp;&nbsp;:</td>
+						<td style="width: 20%" >
+							<datepicker date-format="MM/dd/yyyy">
+								<input id="billDueDate" ng-model="bill.billDueDate" type="text" />
+							</datepicker>
+						</td>
+					</tr>
+					<tr style="background-color: #E8EBE8; color: black;"
+						class="coloredRow">
+						<th colspan="6">Bill Period</th>
+					</tr>
+					<tr>
+						<td>From Date&nbsp;&nbsp;:</td>
+						<td >
+							<datepicker date-format="MM/dd/yyyy">
+								<input id="billFromDate" ng-model="bill.billPeriodFromDate" type="text" />
+							</datepicker>
+						</td>
+						<td></td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;To Date&nbsp;&nbsp;:</td>
+						<td>
+							<datepicker date-format="MM/dd/yyyy">
+								<input id="billToDate" ng-model="bill.billPeriodToDate" type="text" />
+							</datepicker>
+						</td>
+					</tr>					
+				</tbody>
+			</table>
+		</div>
+		<div uib-accordion-group class="panel-default"
+			heading="Customer Details">
+			<table class="table table-striped">
+				<thead>
+					<tr style="background-color: #E8EBE8; color: black;">
+						<th colspan="6" align="center">CUSTOMER DETAILS</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="width: 20%" ng-model="bc.bill.persnFlatNum">Flat #&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+						<td style="width: 20%"><input id="customersFlatNo" type="text" ng-model="bc.bill.persnFlatNum"/>
+						</td>
+						<td style="width: 20%">
+							<button id="searchFlatNumber" class="button" ng-click="getCustomerData()">Search!!</button></td>
+						<td style="width: 20%"></td>
+						<td style="width: 20%"></td>
+					</tr>
+					<tr>
+						<td>First Name&nbsp;:</td>
+						<td>{{billCustomer.persnFirstName}}</td>
+						<td></td>
+						<td>Last Name&nbsp;:</td>
+						<td>{{billCustomer.persnLastName}}</td>
+					</tr>
+					<tr>
+						<td>Phone #&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+						<td>{{billCustomer.persnDetail.landLineNumber}}</td>
+						<td></td>
+						<td>Mobile #&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+						<td>{{billCustomer.persnDetail.mobileNumber}}</td>
+					</tr>
+					<tr>
+						<td>Email Id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+						<td>{{billCustomer.persnDetail.emailId}}</td>
+						<td></td>
+						<td>Etc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+	
+		</div>
+		<div uib-accordion-group class="panel-default" heading="Bill Items">
+			<div>
+				<table width="100%" class="table table-striped">
+					<tr>
+						<td	style="text-align: centre; background-color: #A8A8A8; color: black;">
+							<b>BILL ITEMS</b>
+						</td>
+					</tr>
+					<tr></tr>
+				</table>
+			</div>
+			<table class="table table-striped" width="90%">
+				<tr>
+					<td>
+					<select ng-model="selectedSrvc.srvcPlanName" ng-change="srvcSelect()">
+						<option value="{{x.srvcPlanName}}" ng-repeat="x in servicePlanView.data">{{x.srvcPlanName}}</option>
+					</select>
+					</td>
+				</tr>
+			</table>
+			<table class="table table-striped" width="90%">
+				<thead>
+					<tr>
+						<th>Sl#</th>
+						<th>Service Code</th>
+						<th>Service Name</th>
+						<th>Price</th>
+						<th>Quantity</th>
+						<th>Subtotal</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in bill.billLineItems" >
+						<td>{{$index + 1}}</td>
+						<td>
+							<div>
+								<select ng-model="item.billItemService.srvcCode">
+									<option>{{service.service.srvcCode}}</option>
+								</select>
+							</div></td>
+						<td ng-model="item.billItemService.srvcName"><span>{{service.service.srvcName}}</span></td>
+						<td><span>{{service.srvcChargeComponent.chargeRate.price.amount}}</span>
+						</td>
+						<td><input style="width: 50px;" ng-model="item.billItemQuantity"/></td>
+						<td ng-model="item.billItemAmount">{{item.billItemAmount = item.billItemQuantity * service.srvcChargeComponent.chargeRate.price.amount}}</td>
+						<td>
+							<button ng-click="removeBillItem(item)">Remove Item</button></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<td colspan="5" style="text-align: right;"><strong>TOTAL
+								TAX:</strong>
+						</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="5" style="text-align: right;"><strong>TOTAL
+								AMOUNT:</strong>{{bill.billTotalAmount}}
+						</td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+			<br>
+			<button ng-click="addItem()">Add Item</button>
+		</div>
+		<div uib-accordion-group class="panel-danger" heading="Bill Summary">
+			<table class="table table-striped" width="90%">
+	
+				<tr>
+					<td>Bill Date</td>
+					<td>{{bill.billDate}}</td>
+					<td>Bill Due Date</td>
+					<td>{{bill.billDueDate}}</td>
+				</tr>
+				<tr>
+					<td>Bill Period From Date</td>
+					<td>{{bill.billPeriodFromDate}}</td>
+					<td>Bill Period To Date</td>
+					<td>{{bill.billPeriodToDate}}</td>
+				</tr>
+	
+				<tr>
+					<td>First Name&nbsp;:</td>
+					<td>{{billCustomer.persnFirstName}}</td>
+					<td>Last Name&nbsp;:</td>
+					<td>{{billCustomer.persnLastName}}</td>
+				</tr>
+			</table>
+			<div>
+				<table class="table table-striped" width="90%">
+					<thead>
+						<tr>
+							<th>Sl#</th>
+							<th>Service Code</th>
+							<th>Service Name</th>
+							<th>Price</th>
+							<th>Quantity</th>
+							<th>Subtotal</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in bill.billLineItems">
+							<td>{{$index + 1}}</td>
+							<td><span>{{service.service.srvcCode}}</span></td>
+							<td><span>{{service.service.srvcName}}</span></td>
+							<td><span>{{service.srvcChargeComponent.chargeRate.price.amount}}</span></td>
+							
+							<td><span>{{item.billItemQuantity}}</span></td>							
+							<td><span>{{item.billItemAmount}}</span></td>
+							<td></td>
+						</tr>
+					</tbody>
+					<tbody>
+						<tr style="background-color: #C5C9C5; color: black;">
+							<td colspan="5" style="text-align: right;"><strong>TOTAL
+									TAX:</strong>
+							</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr style="background-color: #E8EBE8; color: black;">
+							<td colspan="5" style="text-align: right;"><strong>TOTAL
+									AMOUNT:</strong>
+							</td>
+							<td>{{bill.billTotalAmount}}</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</uib-accordion>
+		<button ng-click="createBill()">Submit Bill</button>
+		<button>Reset</button>
+
+	<!--Test End --> </uib-tab> </uib-tabset>
+</div>

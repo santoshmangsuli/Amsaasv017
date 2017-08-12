@@ -1,0 +1,152 @@
+<div id="userProfileTabs" class="tabbable">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#usrMgr3" data-toggle="tab">USERS
+				DETAILS<i class="glyphicons_411_twitter"></i>
+		</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<div id="usrMgr3" class="tab-pane">
+		
+			<form id="userRegistrationForm" data-bind="submit: addNewUser"
+				action="" method="post">
+				<div class="fileinput fileinput-new" data-provides="fileinput">
+				  <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+				    <img data-src="holder.js/100%x100%" alt="...">
+				  </div>
+				  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+				  <div>
+				    <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
+				    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+				  </div>
+				</div>
+				<table id="userRegistrationTable">
+					<thead>
+						<tr class="coloredRow">
+							<th colspan="5">USER DETAILS</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>First Name:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><input id="usrFirstName" 
+								data-bind="value: userModelProfile.dataModel.persnFirstName,enable: userModelProfile.viewModel.isEditable"
+								required type="text" />
+							</td>
+							<td></td>
+							<td>Last Name:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><input id="usrLastName" placeholder="Last Name"
+								data-bind="value: userModelProfile.dataModel.persnLastName,enable: userModelProfile.viewModel.isEditable"
+								required type="text" />
+							</td>
+						</tr>
+						<tr>
+							<td>Phone #:</td>
+							<td><input id="usrLastName" placeholder="Phone"
+								data-bind="value: userModelProfile.dataModel.persnPhoneNum,enable: userModelProfile.viewModel.isEditable"
+								value="" required type="text" />
+							</td>
+							<td></td>
+							<td>Mobile #:</td>
+							<td><input id="usrLastName" placeholder="Mobile"
+								data-bind="value: userModelProfile.dataModel.persnMobileNum,enable: userModelProfile.viewModel.isEditable"
+								value="" required type="text" />
+							</td>
+						</tr>
+						<tr>
+							<td>Email Id:</td>
+							<td><input id="usrLastName" placeholder="Email Id"
+								data-bind='value: userModelProfile.dataModel.persnEmailId,enable: userModelProfile.viewModel.isEditable,valueUpdate: "afterkeydown"'
+								value="" required pattern="^[a-z0-9].*@" type="text" />
+							</td>
+							<td></td>
+							<td>User Type</td>
+							<td>
+								<select data-bind="value: userModelProfile.dataModel.persnRoles,enable: userModelProfile.viewModel.isEditable">
+									<option value="Owner">Owner</option>
+									<option value="Tenant">Tenant</option>
+									<option value="Member">Association Member</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="coloredRow">
+							<th colspan="5">ADDRESS DETAILS</th>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>Flat#:</td>
+							<td><input id="flatNo" placeholder="Flat"
+								data-bind="value: userModelProfile.dataModel.persnFlatNum,enable: userModelProfile.viewModel.isEditable" 
+								required type="text" />
+							</td>
+							<td></td>
+							<td></td>
+							<td>
+							</td>
+						</tr>
+						<tr>
+							<td>Block #:</td>
+							<td><input id="blockNo" placeholder="Block"
+								 value=""
+								 />
+							</td>
+							<td></td>
+							<td>Apartment Name:</td>
+							<td><input id="apartmentName" placeholder="Apartment Name"
+								data-bind="value: userModelProfile.dataModel.apartmentName,enable: userModelProfile.viewModel.isEditable"
+								 required type="text" />
+							</td>
+						</tr>
+						<tr>
+							<td>Street Name:</td>
+							<td><input id="streetName" placeholder="Street Name"
+								data-bind="value: userModelProfile.dataModel.street,enable: userModelProfile.viewModel.isEditable" 
+								type="text" />
+							</td>
+							<td></td>
+							<td>Nearby Landmark:</td>
+							<td><input id="landMark" placeholder="Nearby Landmark"
+								data-bind="value: userModelProfile.dataModel.landMark,enable: userModelProfile.viewModel.isEditable" 
+								type="text" />
+							</td>
+						</tr>
+						<tr>
+							<td>City:</td>
+							<td><input id="city" placeholder="City"
+								data-bind="value: userModelProfile.dataModel.city,enable: userModelProfile.viewModel.isEditable" 
+								required type="text" />
+							</td>
+							<td></td>
+							<td>Zip Code:</td>
+							<td><input id="zipCode" placeholder="Zip Code" />
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td>
+								<button value="Edit" data-bind="click: makeEditable" >Edit</button>
+								<button value="Submit" type="submit" data-bind="visible: userModelProfile.viewModel.isEditable">Submit</button>
+								<button  data-bind="click: cancelEditable,visible: userModelProfile.viewModel.isEditable" >Cancel</button>
+							</td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	</div>
+</div>

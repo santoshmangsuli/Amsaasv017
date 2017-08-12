@@ -1,0 +1,204 @@
+<div id="userManagerTabs">	
+	<md-tabs md-dynamic-height
+		md-border-bottom> 
+	<md-tab label="USERS DASHBOARD">
+	<!-- Test Start <h1 class="md-display-2">Tab One</h1>-->
+	<md-content class="md-padding"> 
+	<div>
+		<md-table-container>
+		<table md-table>
+			<thead md-head>
+
+				<tr md-row>
+					<th md-column>Id&nbsp;</th>
+					<th md-column>Flat #&nbsp;</th>
+					<th md-column>First Name&nbsp;</th>
+					<th md-column>Last Name&nbsp;</th>
+					<th md-column>Mobile Num&nbsp;</th>
+					<th md-column>Start Date&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody md-body>
+			<tr md-row ng-repeat="item in pagedItems[currentPage-1] | limitTo: myLimit: (myPage - 1) * myLimit">
+					<td md-cell>{{item.persnId}}</td>
+					<td md-cell>{{item.persnAddress.flatNumber}}</td>
+					<td md-cell>{{item.persnFirstName}}</td>
+					<td md-cell>{{item.persnLastName}}</td>
+					<td md-cell>{{item.persnDetail.mobileNumber}}</td>
+					<td md-cell>{{item.startDate}}</td>
+				</tr>
+				<tr></tr>
+			</tbody>
+		</table>
+		</md-table-container>
+		<md-table-pagination md-limit="10" md-page="currentPage" md-total="{{ctrlusers.length}}"></md-table-pagination>
+	</div>
+	<!-- Test End -->
+	</md-content>  
+	</md-tab> 
+	<md-tab label="REGISTER NEW USER"> 
+	<md-content
+		class="md-padding">	
+	<div id="usrMgr1" class="tab-pane">
+		<form id="userRegistrationForm" action="" method="post">
+			<table id="userRegistrationTable" style="width: 1100px">
+				<thead>
+					<tr style="height: 50px">
+						<th colspan="5" style="background-color: white"><h4>User
+								Details</h4>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr style="height: 50px">
+						<td style="width: 200px; padding-left: 100px"><label>First
+								Name:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						</td>
+						<td><input placeholder="First Name"
+							ng-model="uc.user.persnFirstName" value="" required type="text"
+							class="form-control" />
+						</td>
+						<td></td>
+						<td style="width: 200px; padding-left: 100px"><label>Last
+								Name:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						</td>
+						<td><input placeholder="Last Name"
+							ng-model="uc.user.persnLastName" value="" required type="text"
+							class="form-control" />
+						</td>
+					</tr>
+					<tr style="height: 50px">
+						<td style="width: 200px; padding-left: 100px"><label>Phone
+								#:</label>
+						</td>
+						<td><input placeholder="Phone"
+							ng-model="uc.user.persnPhoneNum" value="" required type="text"
+							class="form-control" />
+						</td>
+						<td></td>
+						<td style="width: 200px; padding-left: 100px"><label>Mobile
+								#:</label>
+						</td>
+						<td><input placeholder="Mobile"
+							ng-model="uc.user.persnMobileNum" value="" required type="text"
+							class="form-control" />
+						</td>
+					</tr>
+					<tr style="height: 50px">
+						<td style="width: 200px; padding-left: 100px"><label>Email
+								Id:</label>
+						</td>
+						<td><input placeholder="Email Id"
+							ng-model='uc.user.persnEmailId' value="" required
+							pattern="^[a-z0-9].*@" type="text" class="form-control" />
+						</td>
+						<td></td>
+						<td style="width: 200px; padding-left: 100px"><label>User
+								Type</label>
+						</td>
+						<td><select ng-model="uc.user.persnRoles"
+							class="form-control">
+								<option value="Owner">Owner</option>
+								<option value="Tenant">Tenant</option>
+								<option value="Member">Association Member</option>
+						</select>
+						</td>
+					</tr>
+					<tr style="height: 50px">
+						<td style="width: 200px; padding-left: 100px"><label>Start
+								Date:</label>
+						</td>
+						<td><datepicker date-format="yyyy-MM-dd"> <input
+								ng-model="uc.user.startDate" value="" type="text"
+								class="form-control" /> </datepicker></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr style="height: 50px">
+						<th colspan="5">ADDRESS DETAILS</th>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr style="height: 50px">
+						<td style="width: 200px; padding-left: 100px"><label>Flat#:</label>
+						</td>
+						<td><input placeholder="Flat" ng-model="uc.user.persnFlatNum"
+							value="" required type="text" class="form-control" />
+						</td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr style="height: 50px">
+						<td style="width: 200px; padding-left: 100px"><label>Block
+								#:</label>
+						</td>
+						<td><input placeholder="Block" value="" class="form-control" />
+						</td>
+						<td></td>
+						<td style="width: 200px; padding-left: 50px"><label>Apartment
+								Name:</label>
+						</td>
+						<td><input placeholder="Apartment Name"
+							ng-model="uc.user.apartmentName" value="" required type="text"
+							class="form-control" />
+						</td>
+					</tr>
+					<tr style="height: 50px">
+						<td style="width: 200px; padding-left: 100px"><label>Street
+								Name:</label>
+						</td>
+						<td><input placeholder="Street Name"
+							ng-model="uc.user.street" value="" type="text"
+							class="form-control" />
+						</td>
+						<td></td>
+						<td style="width: 200px; padding-left: 50px"><label>Nearby
+								Landmark:</label>
+						</td>
+						<td><input placeholder="Nearby Landmark"
+							ng-model="uc.user.landMark" value="" type="text"
+							class="form-control" />
+						</td>
+					</tr>
+					<tr style="height: 50px">
+						<td style="width: 200px; padding-left: 100px"><label>City:</label>
+						</td>
+						<td><input placeholder="City" ng-model="uc.user.city"
+							value="" required type="text" class="form-control" />
+						</td>
+						<td></td>
+						<td style="width: 200px; padding-left: 100px"><label>Zip
+								Code:</label>
+						</td>
+						<td><input placeholder="Zip Code" value=""
+							class="form-control" />
+						</td>
+					</tr>
+					<tr style="height: 50px">
+						<td></td>
+						<td></td>
+						<td>
+							<button class="btn btn-default" value="Reset" type="reset">Reset</button>
+							<button class="btn btn-default" value="Submit" type="button"
+								ng-click="uc.submitUser()">Submit</button></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+	</md-content> </md-tab> </md-tabs> 
+</div>

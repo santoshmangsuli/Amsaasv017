@@ -1,0 +1,169 @@
+<div id="userManagerTabs">
+  <uib-tabset active="active">
+    <uib-tab index="0" heading="USERS DASHBOARD">
+		<!-- Test Start -->
+        <div>
+            <table class="table table-striped table-condensed table-hover">
+                <thead>
+
+                    <tr>
+                        <th class="persnId" custom-sort order="'persnId'" sort="sort">Id&nbsp;</th>
+                        <th class="persnAddress.flatNumber" custom-sort order="'persnAddress.flatNumber'" sort="sort">Flat #&nbsp;</th>
+                        <th class="persnFirstName" custom-sort order="'persnFirstName'" sort="sort">First Name&nbsp;</th>
+                        <th class="persnLastName" custom-sort order="'persnLastName'" sort="sort">Last Name&nbsp;</th>
+                        <th class="mobileNumber" custom-sort order="'mobileNumber'" sort="sort">Mobile Num&nbsp;</th>
+                        <th class="startDate" custom-sort order="'startDate'" sort="sort">Start Date&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in pagedItems[currentPage-1] | orderBy:sort.sortingOrder:sort.reverse">
+                        <td>{{item.persnId}}</td>
+                        <td>{{item.persnAddress.flatNumber}}</td>
+                        <td>{{item.persnFirstName}}</td>
+                        <td>{{item.persnLastName}}</td>
+                        <td>{{item.persnDetail.mobileNumber}}</td>
+                        <td>{{item.startDate}}</td>                        
+                    </tr>
+                    <tr></tr>
+                </tbody>
+                <tfoot>
+                    <td colspan="6">
+                        <ul uib-pagination total-items="ctrlusers.length" items-per-page="10" ng-model="currentPage"  class="pagination-sm" boundary-link-numbers="true" rotate="false"></ul>
+                    </td>
+                    
+                </tfoot>
+            </table>
+        </div>
+		
+		<!-- Test End -->
+    </uib-tab>
+    <uib-tab index="1" heading="REGISTER NEW USER" disable="tab.disabled">
+      		<div id="usrMgr1" class="tab-pane">
+			<form id="userRegistrationForm" action="" method="post">
+				<table id="userRegistrationTable" style="width:1100px">
+					<thead>
+						<tr style="height:50px">
+							<th colspan="5" style="background-color:white"><h4>User Details</h4></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr style="height:50px">
+							<td style="width:200px; padding-left:100px"><label>First Name:&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+							<td><input placeholder="First Name"
+								ng-model="uc.user.persnFirstName"
+								value="" required type="text" class="form-control"/></td>
+							<td></td>
+							<td style="width:200px; padding-left:100px"><label>Last Name:&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+							<td><input placeholder="Last Name"
+								ng-model="uc.user.persnLastName"
+								value="" required type="text" class="form-control"/></td>
+						</tr>
+						<tr style="height:50px">
+							<td style="width:200px; padding-left:100px"><label>Phone #:</label></td>
+							<td><input placeholder="Phone"
+								ng-model="uc.user.persnPhoneNum"
+								value="" required type="text" class="form-control"/></td>
+							<td></td>
+							<td style="width:200px; padding-left:100px"><label>Mobile #:</label></td>
+							<td><input placeholder="Mobile"
+								ng-model="uc.user.persnMobileNum"
+								value="" required type="text" class="form-control"/></td>
+						</tr>
+						<tr style="height:50px">
+							<td style="width:200px; padding-left:100px"><label>Email Id:</label></td>
+							<td><input placeholder="Email Id"
+								ng-model='uc.user.persnEmailId'
+								value="" required pattern="^[a-z0-9].*@" type="text" class="form-control"/></td>
+							<td></td>
+							<td style="width:200px; padding-left:100px"><label>User Type</label></td>
+							<td><select
+								ng-model="uc.user.persnRoles" class="form-control">
+									<option value="Owner">Owner</option>
+									<option value="Tenant">Tenant</option>
+									<option value="Member">Association Member</option>
+							</select></td>
+						</tr>
+						<tr style="height:50px">
+							<td style="width:200px; padding-left:100px"><label>Start Date:</label></td>
+							<td>
+								<datepicker date-format="yyyy-MM-dd">
+  									<input ng-model="uc.user.startDate" value="" type="text" class="form-control"/>
+								</datepicker>				
+							</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr style="height:50px">
+							<th colspan="5">ADDRESS DETAILS</th>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr style="height:50px">
+							<td  style="width:200px; padding-left:100px"><label>Flat#:</label></td>
+							<td>
+							
+							<input placeholder="Flat"
+								ng-model="uc.user.persnFlatNum"
+								value="" required type="text" class="form-control" /></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr style="height:50px">
+							<td  style="width:200px; padding-left:100px"><label>Block #:</label></td>
+							<td><input placeholder="Block" value="" class="form-control"/>
+							</td>
+							<td></td>
+							<td  style="width:200px; padding-left:50px"><label>Apartment Name:</label></td>
+							<td><input placeholder="Apartment Name"
+								ng-model="uc.user.apartmentName"
+								value="" required type="text" class="form-control"/></td>
+						</tr>
+						<tr style="height:50px">
+							<td style="width:200px; padding-left:100px"><label>Street Name:</label></td>
+							<td><input placeholder="Street Name"
+								ng-model="uc.user.street" value=""
+								type="text" class="form-control"/></td>
+							<td></td>
+							<td style="width:200px; padding-left:50px"><label>Nearby Landmark:</label></td>
+							<td><input placeholder="Nearby Landmark"
+								ng-model="uc.user.landMark" value=""
+								type="text" class="form-control"/></td>
+						</tr>
+						<tr style="height:50px">
+							<td style="width:200px; padding-left:100px"><label>City:</label></td>
+							<td><input placeholder="City"
+								ng-model="uc.user.city" value=""
+								required type="text" class="form-control"/></td>
+							<td></td>
+							<td style="width:200px; padding-left:100px"><label>Zip Code:</label></td>
+							<td><input placeholder="Zip Code" value="" class="form-control"/></td>
+						</tr>
+						<tr style="height:50px">
+							<td></td>
+							<td></td>
+							<td>
+								<button class="btn btn-default" value="Reset" type="reset">Reset</button>
+								<button class="btn btn-default" value="Submit" type="button" ng-click="uc.submitUser()">Submit</button>
+							</td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>      
+    </uib-tab>
+  </uib-tabset>
+</div>
